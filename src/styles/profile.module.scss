@@ -1,0 +1,26 @@
+@use '@styles/_variables.scss' as *;
+
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    &__info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    &__avatar {
+        width: 26px;
+        height: 26px;
+    }
+
+    &__name {
+        font-size: 18px;
+        color: $primary-color;
+    }
+}

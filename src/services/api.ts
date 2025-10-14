@@ -10,12 +10,12 @@ export const api = axios.create({
 });
 
 
-export const getHistoricalData = async () => {
+export const getHistoricalData = async (): Promise<CloudSpendResponse> => {
     const { data } = await api.get<CloudSpendResponse>("/cloudSpend");
     return data;
 };
 
-export const getProjectionData = async () => {
+export const getProjectionData = async (): Promise<CloudSpendProjectionResponse> => {
     const { data } = await api.get<CloudSpendProjectionResponse>("/cloudSpendProjection");
     return data;
 };

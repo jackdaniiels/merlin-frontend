@@ -1,0 +1,29 @@
+@use '@styles/_variables.scss' as *;
+
+.clean {
+    width: 200px;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid $gray-light;
+    border-radius: 15px;
+    background-color: $white;
+    font-size: 14px;
+    color: $warning-color;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+        border: 1px solid $warning-color;
+        box-shadow: $shadow;
+    }
+
+    &__icon {
+        width: 16px;
+        height: 16px;
+    }
+}

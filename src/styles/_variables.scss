@@ -1,0 +1,86 @@
+@use 'sass:color';
+
+// 🎨 PALETA BASE ------------------------------------------------
+$primary-color: #2A3374;
+$primary-color-darken: #1f2976;
+$secondary-color: #3483FA;
+$accent-color: #ff7675;
+$success-color: #2ecc71;
+$warning-color: #E5AA09;
+$error-color: #B20808;
+$text-color: #2A3374;
+$gray-light: #D0D0D0;
+$gray-medium: #9B9B9B;
+$gray-dark: #707070;
+$background-color: #ffffff;
+$white: #ffffff;
+$shadow: 0px 2px 6px #00000029;
+
+// ⚙️ TIPOGRAFÍA --------------------------------------------------
+$font-family-base: 'Inter', 'Roboto', sans-serif;
+$font-size-base: 16px;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// 📏 ESPACIADO Y RADIOS -----------------------------------------
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// 🌗 TEMAS -------------------------------------------------------
+// Usamos variables CSS para poder alternar el tema dinámicamente desde JS
+:root {
+    --color-bg: #ffffff;
+    --color-text: #1a1a1a;
+    --color-surface: #f7f7f8;
+    --color-border: #e0e0e0;
+
+    --color-primary: #0066ff;
+    --color-secondary: #00b894;
+    --color-accent: #ff7675;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.16);
+
+    --transition-base: all 0.25s ease-in-out;
+}
+
+// 🌙 MODO OSCURO -------------------------------------------------
+[data-theme='dark'] {
+    --color-bg: #121212;
+    --color-text: #f5f5f5;
+    --color-surface: #1e1e1e;
+    --color-border: #2e2e2e;
+
+    --color-primary: #4dabf7;
+    --color-secondary: #55efc4;
+    --color-accent: #ff6b6b;
+
+    --shadow-sm: 0 1px 3px rgba(255, 255, 255, 0.08);
+    --shadow-md: 0 2px 8px rgba(255, 255, 255, 0.12);
+    --shadow-lg: 0 4px 16px rgba(255, 255, 255, 0.16);
+}
+
+// 🧩 MIXINS ------------------------------------------------------
+@mixin transition($property: all, $time: 0.25s, $type: ease-in-out) {
+    transition: $property $time $type;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// 🧱 FUNCIONES ---------------------------------------------------
+@function px-to-rem($px, $base: $font-size-base) {
+    @return #{$px / $base}rem;
+}

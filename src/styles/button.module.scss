@@ -1,16 +1,19 @@
+@use '@styles/_variables.scss' as *;
+
 .button {
-    background-color: red;
-    width: 200px;
-    height: 40px;
-    color: white;
+    background-color: $secondary-color;
+    width: 350px;
+    height: 35px;
+    color: $white;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     cursor: pointer;
     transition: all 1s;
+    border: none;
 
     &:hover {
-        background-color: rgb(129, 14, 14);
+        background-color: $primary-color;
     }
 }

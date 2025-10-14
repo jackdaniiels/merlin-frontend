@@ -1,0 +1,25 @@
+@use '@styles/_variables.scss' as *;
+
+
+.logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    &__text {
+        font-size: 14px;
+        color: $gray-medium;
+        display: block;
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+    }
+}

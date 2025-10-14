@@ -1,0 +1,13 @@
+@use '@styles/_variables.scss' as *;
+
+
+.header {
+    background-color: $white;
+    box-shadow: $shadow;
+    height: 93px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 30px;
+    padding-left: 30px;
+}

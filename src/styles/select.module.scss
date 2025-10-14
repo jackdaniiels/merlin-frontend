@@ -1,0 +1,41 @@
+@use '@styles/_variables.scss' as *;
+
+
+.filter {
+    width: 220px;
+
+    &__label {
+        display: block;
+        font-size: 14px;
+        color: $gray-dark;
+        font-weight: 600;
+    }
+
+    &__select {
+        appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        background: url('/arrow_down_icon.svg') no-repeat right 12px center;
+        background-size: 16px;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 2px solid $gray-light;
+        background-color: $white;
+        font-size: 14px;
+        color: $gray-dark;
+        cursor: pointer;
+
+        &:hover {
+            border-color: $primary-color;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &::-ms-expand {
+        display: none;
+    }
+}

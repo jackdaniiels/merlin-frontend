@@ -1,21 +1,30 @@
-import { useFetchData } from "../../hooks/useFetchData";
-import { getHistoricalData, getProjectionData } from "../../services/api";
+import { useSelector } from "react-redux";
+import { DashboardLayout } from "./DashboardLayout";
+import { DateRange } from "./DateRange";
+import { Filters } from "./Filters";
+import { HistoricBarChart } from "./HistoricBarChart";
+import { RootState } from "../../store/store";
+import { ProjectionBarChart } from "./ProjectionBarChart";
+import { ProjectionPieChart } from "./ProjectionPieChart";
+import { HistoricPieChart } from "./HistoricPieChart";
+
 
 const DashboardPage = () => {
-    const { data: historicalData, loading: loadH, error: errH } = useFetchData(getHistoricalData);
-    const { data: projectionData, loading: loadP, error: errP } = useFetchData(getProjectionData);
 
-    console.log('data', historicalData, projectionData)
+    const { type } = useSelector((state: RootState) => state.filters);
 
-    if (loadH || loadP) return <p>Cargando datos...</p>;
-    if (errH || errP) return <p>Error: {errH || errP}</p>;
+    const typeContentMap: Record<string, JSX.Element> = {
+        'Histórico': <HistoricPieChart />,
+        'Proyección': <><ProjectionPieChart /></>,
+        'Histórico y Proyección': <><HistoricBarChart /> <ProjectionBarChart /></>,
+    };
 
     return (
-        <div>
-            <h1>InfraVision Dashboard</h1>
-            {/* <pre>{JSON.stringify(historicalData?.data, null, 2)}</pre> */}
-            <pre>{JSON.stringify(projectionData?.data, null, 2)}</pre>
-        </div>
+        <DashboardLayout>
+            <DateRange />
+            <Filters />
+            {typeContentMap[type]}
+        </DashboardLayout>
     );
 }
 

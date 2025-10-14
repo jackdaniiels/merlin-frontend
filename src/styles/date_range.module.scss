@@ -1,0 +1,13 @@
+@use '@styles/_variables.scss' as *;
+
+.date_range {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+
+    &__controls {
+        display: flex;
+        gap: 20px;
+    }
+}
