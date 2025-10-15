@@ -12,7 +12,7 @@ interface ChartSettingOptions {
 export const createChartSettings = ({
     title = "Gráfico",
     xKey = "month",
-    height = 350,
+    height = 260,
     yLabel = "Valor",
     labelColor = "#666",
     tickColor = "#999",

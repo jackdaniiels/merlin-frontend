@@ -20,13 +20,13 @@ const DashboardPage = () => {
     // };
     const typeContentMap: Record<string, JSX.Element> = {
         'Histórico': <><HistoricBarChart /> </>,
-        'Proyección': <><ProjectionPieChart /></>,
+        'Proyección': <><ProjectionBarChart /></>,
         'Histórico y Proyección': <><HistoricBarChart /> <ProjectionBarChart /></>,
     };
 
     return (
         <DashboardLayout>
-            <DateRange />
+            {/* <DateRange /> */}
             <Filters />
             {typeContentMap[type]}
         </DashboardLayout>
