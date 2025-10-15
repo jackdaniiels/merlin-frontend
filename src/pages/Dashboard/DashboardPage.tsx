@@ -13,8 +13,13 @@ const DashboardPage = () => {
 
     const { type } = useSelector((state: RootState) => state.filters);
 
+    // const typeContentMap: Record<string, JSX.Element> = {
+    //     'Histórico': <><HistoricBarChart /><HistoricPieChart /> </>,
+    //     'Proyección': <><ProjectionPieChart /></>,
+    //     'Histórico y Proyección': <><HistoricBarChart /> <ProjectionBarChart /></>,
+    // };
     const typeContentMap: Record<string, JSX.Element> = {
-        'Histórico': <HistoricPieChart />,
+        'Histórico': <><HistoricBarChart /> </>,
         'Proyección': <><ProjectionPieChart /></>,
         'Histórico y Proyección': <><HistoricBarChart /> <ProjectionBarChart /></>,
     };

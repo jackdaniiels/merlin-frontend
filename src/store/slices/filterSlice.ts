@@ -1,62 +1,26 @@
 // filtersSlice.ts
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-export interface FiltersState {
-    type: 'Histórico' | 'Proyección' | 'Histórico y Proyección';
-    vertical: string;
-    area: string;
-    initiative: string;
-    service: string;
-    options: {
-        type: string[];
-        verticals: string[];
-        areas: string[];
-        initiatives: string[];
-        services: string[];
-    };
-    loading: boolean;
-    error: string | null;
-}
-
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchFilters } from '../thunks/filters-thunk';
+import { FiltersState } from '../../models/filters.interface';
+import { fetchFiltersDependent } from '../thunks/filters-dependent-thunk';
 
 
 const initialState: FiltersState = {
     type: 'Histórico',
-    vertical: '',
+    vertical: 'Retail',
     area: '',
     initiative: '',
     service: '',
     options: {
         type: ['Histórico', 'Proyección', 'Histórico y Proyección'],
-        verticals: ['1', '2', '3'],
-        areas: ['4', '5', '6'],
-        initiatives: ['7', '8', '9'],
-        services: ['10', '11', '12'],
+        verticals: [],
+        areas: [],
+        initiatives: [],
+        services: [],
     },
     loading: false,
     error: null,
 };
-
-// export const fetchVerticals = createAsyncThunk<string[]>('filters/fetchVerticals', async () => {
-//     const response = await axios.get('/api/verticals');
-//     return response.data;
-// });
-
-// export const fetchAreas = createAsyncThunk<string[]>('filters/fetchAreas', async () => {
-//     const response = await axios.get('/api/areas');
-//     return response.data;
-// });
-
-// export const fetchInitiatives = createAsyncThunk<string[]>('filters/fetchInitiatives', async () => {
-//     const response = await axios.get('/api/initiatives');
-//     return response.data;
-// });
-
-// export const fetchServices = createAsyncThunk<string[]>('filters/fetchServices', async () => {
-//     const response = await axios.get('/api/services');
-//     return response.data;
-// });
 
 const filtersSlice = createSlice({
     name: 'filters',
@@ -75,31 +39,54 @@ const filtersSlice = createSlice({
             state.service = '';
         },
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         // Verticals
-    //         .addCase(fetchVerticals.pending, (state) => { state.loading = true; })
-    //         .addCase(fetchVerticals.fulfilled, (state, action: PayloadAction<string[]>) => {
-    //             state.options.verticals = action.payload;
-    //             state.loading = false;
-    //         })
-    //         .addCase(fetchVerticals.rejected, (state, action) => {
-    //             state.loading = false;
-    //             state.error = action.error.message || 'Failed to fetch verticals';
-    //         })
-    //         // Areas
-    //         .addCase(fetchAreas.fulfilled, (state, action: PayloadAction<string[]>) => {
-    //             state.options.areas = action.payload;
-    //         })
-    //         // Initiatives
-    //         .addCase(fetchInitiatives.fulfilled, (state, action: PayloadAction<string[]>) => {
-    //             state.options.initiatives = action.payload;
-    //         })
-    //         // Services
-    //         .addCase(fetchServices.fulfilled, (state, action: PayloadAction<string[]>) => {
-    //             state.options.services = action.payload;
-    //         });
-    // },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchFilters.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchFilters.fulfilled, (state, action) => {
+                state.loading = false;
+                const { verticals, areas, initiatives, services } = action.payload;
+                state.options.areas = areas;
+                state.options.initiatives = initiatives;
+                state.options.services = services;
+                state.options.verticals = verticals;
+            })
+            .addCase(fetchFilters.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Failed to fetch filters';
+            })
+            .addCase(fetchFiltersDependent.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchFiltersDependent.fulfilled, (state, action) => {
+                state.loading = false;
+                const field = action.meta.arg.field;
+
+                switch (field) {
+                    case 'vertical':
+                        state.options.verticals = action.payload;
+                        break;
+                    case 'area':
+                        state.options.areas = action.payload;
+                        break;
+                    case 'initiative':
+                        state.options.initiatives = action.payload;
+                        break;
+                    case 'service':
+                        state.options.services = action.payload;
+                        break;
+                    default:
+                        break;
+                }
+            })
+            .addCase(fetchFiltersDependent.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Failed to fetch filters';
+            });
+    },
 });
 
 export const { setType, setVertical, setArea, setInitiative, setService, clearFilters } = filtersSlice.actions;
