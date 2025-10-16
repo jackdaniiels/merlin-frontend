@@ -1,7 +1,7 @@
-import React from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import cardTotalStyles from '@styles/card_total.module.scss';
+import { handleParseCurrency } from '../../utils/currency-utils';
 
 const CardTotal = () => {
 
@@ -15,7 +15,7 @@ const CardTotal = () => {
                     <h6 className={cardTotalStyles.card_total__title}>
                         Gasto total <span className={cardTotalStyles.card_total__filter}>{value}</span>:
                     </h6>
-                    <span className={cardTotalStyles.card_total__amount}>{spendTotal}</span>
+                    <span className={cardTotalStyles.card_total__amount}> $USD {handleParseCurrency(spendTotal)}</span>
                 </div>
             }
         </>

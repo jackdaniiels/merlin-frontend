@@ -2,7 +2,7 @@
 
 .button {
     background-color: $secondary-color;
-    width: 350px;
+    width: 300px;
     height: 35px;
     color: $white;
     display: flex;
@@ -15,5 +15,11 @@
 
     &:hover {
         background-color: $primary-color;
+    }
+
+    &:disabled,
+    &.disabled {
+        background-color: $gray-medium;
+        cursor: not-allowed;
     }
 }

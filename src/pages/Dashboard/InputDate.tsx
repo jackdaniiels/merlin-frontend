@@ -1,5 +1,4 @@
-import * as React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import TextField from '@mui/material/TextField';
@@ -7,10 +6,11 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 interface InputDateProps {
     label?: string;
+    value: Dayjs | null;
+    setValue: (value: Dayjs | null) => void;
 }
 
-export default function InputDate({ label }: InputDateProps) {
-    const [value, setValue] = React.useState<Dayjs | null>(null);
+export default function InputDate({ label, value, setValue }: InputDateProps) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>

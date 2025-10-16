@@ -1,13 +1,22 @@
 @use '@styles/_variables.scss' as *;
+@use '@styles/breakpoints.scss' as *;
 
 .date_range {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
 
     &__controls {
-        display: flex;
+        display: grid;
         gap: 20px;
+        grid-template-columns: 1fr 1fr 1fr 320px;
+
+        @include breakpoint-mobile-tablet() {
+            margin-left: 30px;
+            margin-right: 30px;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
     }
+
 }

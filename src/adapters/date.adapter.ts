@@ -3,8 +3,8 @@ import dayjs, { Dayjs } from 'dayjs';
 export class DateAdapter {
     private date: Dayjs;
 
-    constructor(date?: Dayjs | null) {
-        const today: Dayjs = dayjs();
+    constructor(date?: Dayjs | null, dateString?: string) {
+        const today: Dayjs = dayjs(dateString || undefined);
         this.date = date ?? today;
     }
 

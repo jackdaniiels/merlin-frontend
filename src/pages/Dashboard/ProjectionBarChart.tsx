@@ -4,13 +4,13 @@ import { createChartSettings } from '../../factories/chart-settings-factory';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Spinner } from './Spinner';
+import { DateRange } from './DateRange';
 
 const ProjectionBarChart = () => {
     const { data, loading } = useSelector((state: RootState) => state.projection);
 
-    if (loading || !data.length) return <Spinner />;
+    if (loading) return <Spinner />;
 
-    // Normalizamos el dataset
     const dataset = data
         .map(item => ({
 
@@ -30,26 +30,29 @@ const ProjectionBarChart = () => {
     const valueFormatter = (value: number | null) => `$${value || 0} USD`;
 
     return (
-        <div className={chartStyles.chart}>
-            <BarChart
+        <>
+            <DateRange min='2025-01-01' max='2025-06-30' />
+            <div className={chartStyles.chart}>
+                <BarChart
 
-                dataset={dataset}
-                sx={{
-                    [`& .MuiBarElement-root`]: {
-                        rx: 6,
-                    },
-                }}
-                series={[
-                    { dataKey: 'proyectedSpend', label: 'Gasto proyectado', valueFormatter, color: '#3fc368ff' },
-                    { dataKey: 'minSpend', label: 'Mínimo proyectado', valueFormatter, color: '#EBD944' },
-                    { dataKey: 'maxSpend', label: 'Máximo proyectado', valueFormatter, color: '#f3a109ff' },
-                ]}
-                {...createChartSettings({
-                    title: "Mes",
-                    yLabel: "Proyección Gasto Infraestructura",
-                })}
-            />
-        </div>
+                    dataset={dataset}
+                    sx={{
+                        [`& .MuiBarElement-root`]: {
+                            rx: 6,
+                        },
+                    }}
+                    series={[
+                        { dataKey: 'proyectedSpend', label: 'Gasto proyectado', valueFormatter, color: '#3fc368ff' },
+                        { dataKey: 'minSpend', label: 'Mínimo proyectado', valueFormatter, color: '#EBD944' },
+                        { dataKey: 'maxSpend', label: 'Máximo proyectado', valueFormatter, color: '#f3a109ff' },
+                    ]}
+                    {...createChartSettings({
+                        title: "Mes",
+                        yLabel: "Proyección Gasto Infraestructura",
+                    })}
+                />
+            </div>
+        </>
     );
 };
 

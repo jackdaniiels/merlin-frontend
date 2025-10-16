@@ -32,7 +32,7 @@ export const Filters = () => {
                 value={vertical}
             />
             <SelectFilter
-                label='Area'
+                label='Área'
                 name='area'
                 options={options?.areas || ['']}
                 handleOnChange={(value) => dispatch(setArea(value))}

@@ -5,11 +5,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Spinner } from './Spinner';
 import CardTotal from './CardTotal';
+import { DateRange } from './DateRange';
 
 const HistoricBarChart = () => {
     const { data, loading } = useSelector((state: RootState) => state.historic);
 
-    if (loading || !data.length) return <Spinner />;
+    if (loading) return <Spinner />;
 
 
     const dataset = data
@@ -30,24 +31,27 @@ const HistoricBarChart = () => {
     const valueFormatter = (value: number | null) => `$${value || 0} USD`;
 
     return (
-        <div className={chartStyles.chart}>
-            <CardTotal />
-            <BarChart
-                dataset={dataset}
-                sx={{
-                    [`& .MuiBarElement-root`]: {
-                        rx: 2,
-                    },
-                }}
-                series={[
-                    { dataKey: 'spend', label: 'Gasto', valueFormatter, color: '#06a1f4ff' },
-                ]}
-                {...createChartSettings({
-                    title: "Mes",
-                    yLabel: "Histórico Gasto Infraestructura",
-                })}
-            />
-        </div>
+        <>
+            <DateRange min='2024-06-01' max='2024-12-31' />
+            <div className={chartStyles.chart}>
+                <CardTotal />
+                <BarChart
+                    dataset={dataset}
+                    sx={{
+                        [`& .MuiBarElement-root`]: {
+                            rx: 2,
+                        },
+                    }}
+                    series={[
+                        { dataKey: 'spend', label: 'Gasto', valueFormatter, color: '#06a1f4ff' },
+                    ]}
+                    {...createChartSettings({
+                        title: "Mes",
+                        yLabel: "Histórico Gasto Infraestructura",
+                    })}
+                />
+            </div>
+        </>
     );
 };
 
