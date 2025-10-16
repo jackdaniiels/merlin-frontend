@@ -1,27 +1,23 @@
 import { useSelector } from "react-redux";
 import { DashboardLayout } from "./DashboardLayout";
-import { DateRange } from "./DateRange";
+// import { DateRange } from "./DateRange";
 import { Filters } from "./Filters";
-import { HistoricBarChart } from "./HistoricBarChart";
 import { RootState } from "../../store/store";
-import { ProjectionBarChart } from "./ProjectionBarChart";
-import { ProjectionPieChart } from "./ProjectionPieChart";
-import { HistoricPieChart } from "./HistoricPieChart";
+import { lazy, Suspense } from "react";
+import { Spinner } from "./Spinner";
 
+
+const LazyProjectionBarChart = lazy(() => import('./ProjectionBarChart'));
+const LazyHistoricBarChart = lazy(() => import('./HistoricBarChart'));
 
 const DashboardPage = () => {
 
     const { type } = useSelector((state: RootState) => state.filters);
 
-    // const typeContentMap: Record<string, JSX.Element> = {
-    //     'Histórico': <><HistoricBarChart /><HistoricPieChart /> </>,
-    //     'Proyección': <><ProjectionPieChart /></>,
-    //     'Histórico y Proyección': <><HistoricBarChart /> <ProjectionBarChart /></>,
-    // };
     const typeContentMap: Record<string, JSX.Element> = {
-        'Histórico': <><HistoricBarChart /> </>,
-        'Proyección': <><ProjectionBarChart /></>,
-        'Histórico y Proyección': <><HistoricBarChart /> <ProjectionBarChart /></>,
+        'Histórico': <Suspense fallback={<Spinner />}><LazyHistoricBarChart /></Suspense>,
+        'Proyección': <Suspense fallback={<Spinner />}><LazyProjectionBarChart /></Suspense>,
+        'Histórico y Proyección': <Suspense fallback={<Spinner />}><LazyHistoricBarChart /> <LazyProjectionBarChart /></Suspense>,
     };
 
     return (

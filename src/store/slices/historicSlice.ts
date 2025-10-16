@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Historic, HistoricData } from '../../models/historic.interface';
+import { Historic, HistoricData, Statics } from '../../models/historic.interface';
 import { fetchHistoric } from '../thunks/historic-thunk';
 
 
@@ -7,12 +7,14 @@ interface HistoricState {
     loading: boolean;
     error: string | null;
     data: Historic[];
+    statics: Statics[];
 }
 
 const initialState: HistoricState = {
     loading: false,
     error: null,
     data: [],
+    statics: [],
 };
 
 const historicSlice = createSlice({
@@ -34,6 +36,7 @@ const historicSlice = createSlice({
             .addCase(fetchHistoric.fulfilled, (state, action: PayloadAction<HistoricData>) => {
                 state.loading = false;
                 state.data = action.payload.data;
+                state.statics = action.payload.statics;
             })
             .addCase(fetchHistoric.rejected, (state, action) => {
                 state.loading = false;

@@ -1,0 +1,66 @@
+// X-Small devices (portrait phones, less than 576px)
+@mixin breakpoint-mobile-xs() {
+    @media (max-width: 991.98px) {
+        @content;
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@mixin breakpoint-mobile-sm() {
+    @media (max-width: 767.98px) {
+        @content;
+    }
+}
+
+// Medium devices (tablets, less than 992px)
+@mixin breakpoint-tablet-md() {
+    @media (min-width:767.99px) and (max-width: 991.98px) {
+        @content;
+    }
+}
+
+// Large devices (desktops, less than 1200px)
+@mixin breakpoint-desktop-lg() {
+    @media (min-width: 991.99px) and (max-width: 1199.98px) {
+        @content;
+    }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@mixin breakpoint-desktop-xl() {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@mixin breakpoint-desktop-xxl() {
+    @media (min-width: 1400px) {
+        @content;
+    }
+}
+
+// ============= Custom =============
+@mixin breakpoint-mobile() {
+    @media (max-width: 767.98px) {
+        @content;
+    }
+}
+
+@mixin breakpoint-mobile-tablet() {
+    @media(max-width: 991.98px) {
+        @content;
+    }
+}
+
+@mixin breakpoint-tablet() {
+    @media (min-width:767.99px) and (max-width: 991.98px) {
+        @content;
+    }
+}
+
+@mixin breakpoint-desktop() {
+    @media(min-width: 991.99px) {
+        @content;
+    }
+}

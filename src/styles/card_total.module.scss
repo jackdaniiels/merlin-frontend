@@ -1,0 +1,33 @@
+@use '@styles/_variables.scss' as *;
+
+.card_total {
+    margin: 0 auto;
+    background-color: $white;
+    box-shadow: $shadow;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    width: 300px;
+    margin-bottom: 10px;
+
+    &__title {
+        font-size: 16px;
+        color: $gray-dark;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    &__filter {
+        font-size: 16px;
+        color: $secondary-color;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    &__amount {
+        font-size: 24px;
+        color: $primary-color;
+        font-weight: bold;
+    }
+}

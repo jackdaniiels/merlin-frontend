@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import errorPageStyles from '@styles/error_page.module.scss';
 
-export const ErrorPage = () => {
+const ErrorPage = () => {
 
     return (
         <div className={errorPageStyles.error_page}>
@@ -15,3 +15,5 @@ export const ErrorPage = () => {
         </div>
     );
 };
+
+export default ErrorPage;

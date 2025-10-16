@@ -5,8 +5,10 @@ export interface FiltersOptionsData {
     services: string[];
 }
 
+export type HistoricType = 'Histórico' | 'Proyección' | 'Histórico y Proyección';
+
 export interface FiltersState {
-    type: 'Histórico' | 'Proyección' | 'Histórico y Proyección';
+    type: HistoricType;
     vertical: string;
     area: string;
     initiative: string;

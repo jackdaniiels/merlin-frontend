@@ -3,11 +3,12 @@ import chartStyles from '@styles/chart.module.scss';
 import { createChartSettings } from '../../factories/chart-settings-factory';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { Spinner } from './Spinner';
 
-export const ProjectionBarChart = () => {
+const ProjectionBarChart = () => {
     const { data, loading } = useSelector((state: RootState) => state.projection);
 
-    if (loading) return <div>Cargando gráfico...</div>;
+    if (loading || !data.length) return <Spinner />;
 
     // Normalizamos el dataset
     const dataset = data
@@ -51,3 +52,5 @@ export const ProjectionBarChart = () => {
         </div>
     );
 };
+
+export default ProjectionBarChart;

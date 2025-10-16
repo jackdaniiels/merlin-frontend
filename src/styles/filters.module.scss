@@ -1,9 +1,26 @@
 @use '@styles/_variables.scss' as *;
+@use '@styles/breakpoints.scss' as *;
 
 .filters {
     margin-top: 2rem;
-    display: flex;
     gap: 30px;
+    display: flex;
     align-items: center;
     justify-content: center;
+
+    @include breakpoint-mobile-tablet() {
+        margin-left: 30px;
+        margin-right: 30px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoint-mobile-sm() {
+        display: grid;
+        place-items: center;
+        justify-items: center;
+        grid-template-columns: 1fr;
+    }
+
+
 }

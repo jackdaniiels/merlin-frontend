@@ -7,9 +7,10 @@ interface SelectFilterProps {
     options: string[];
     value: string;
     handleOnChange: (value: string) => void;
+    cleanValue?: boolean;
 }
 
-export const SelectFilter = ({ label, options, handleOnChange, value, name }: SelectFilterProps) => {
+export const SelectFilter = ({ label, options, handleOnChange, value, name, cleanValue = true }: SelectFilterProps) => {
     return (
         <div className={selectStyles.filter}>
             <label className={selectStyles.filter__label} htmlFor={name}>{label}:</label>
@@ -18,6 +19,7 @@ export const SelectFilter = ({ label, options, handleOnChange, value, name }: Se
                 onChange={(e) => handleOnChange(e.target.value)}
                 value={value}>
                 <option value="" disabled>Seleccione</option>
+                {cleanValue && <option value="">Todos</option>}
                 {
                     options.map((option, index) => (
                         <option key={index} value={option}>{option}</option>

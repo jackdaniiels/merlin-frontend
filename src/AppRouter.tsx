@@ -2,23 +2,28 @@ import {
     createBrowserRouter,
     Navigate,
 } from "react-router";
+import { lazy, Suspense } from 'react';
+import { Spinner } from "./pages/Dashboard/Spinner";
 
-import DashboardPage from "./pages/Dashboard/DashboardPage";
-import { ErrorPage } from "./pages/Error/ErrorPage";
+const DashboardPage = lazy(() => import('./pages/Dashboard/DashboardPage'));
+const ErrorPage = lazy(() => import('./pages/Error/ErrorPage'));
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <DashboardPage />,
-        errorElement: <ErrorPage />,
-    },
-    {
-        path: "/dashboard",
-        element: <DashboardPage />,
-        errorElement: <ErrorPage />,
+        element: (
+            <Suspense fallback={<Spinner />}>
+                <DashboardPage />
+            </Suspense>
+        ),
+        errorElement: (
+            <Suspense fallback={<Spinner />}>
+                <ErrorPage />
+            </Suspense>
+        ),
     },
     {
         path: "*",
-        element: <Navigate to="/" />
-    }
+        element: <Navigate to="/" />,
+    },
 ]);

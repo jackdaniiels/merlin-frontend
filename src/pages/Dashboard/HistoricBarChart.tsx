@@ -3,11 +3,14 @@ import chartStyles from '@styles/chart.module.scss';
 import { createChartSettings } from '../../factories/chart-settings-factory';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { Spinner } from './Spinner';
+import CardTotal from './CardTotal';
 
-export const HistoricBarChart = () => {
+const HistoricBarChart = () => {
     const { data, loading } = useSelector((state: RootState) => state.historic);
 
-    if (loading) return <div>Cargando gráfico...</div>;
+    if (loading || !data.length) return <Spinner />;
+
 
     const dataset = data
         .map(item => ({
@@ -28,6 +31,7 @@ export const HistoricBarChart = () => {
 
     return (
         <div className={chartStyles.chart}>
+            <CardTotal />
             <BarChart
                 dataset={dataset}
                 sx={{
@@ -46,3 +50,6 @@ export const HistoricBarChart = () => {
         </div>
     );
 };
+
+
+export default HistoricBarChart;

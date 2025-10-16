@@ -2,6 +2,7 @@ export interface HistoricData {
     ok: boolean;
     message: string;
     data: Historic[];
+    statics: Statics[];
     error: null;
 }
 
@@ -13,6 +14,11 @@ export interface Historic {
     service: Service;
     date: Date;
     spend: string;
+}
+
+export interface Statics {
+    value: string
+    spendTotal: string;
 }
 
 export enum Area {
@@ -58,3 +64,5 @@ export enum Vertical {
     Fintech = "Fintech",
     Retail = "Retail",
 }
+
+
